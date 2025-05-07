@@ -42,7 +42,7 @@ class TestMaintenanceTimesheetTimeControl(BaseCommon):
                 "date_time": datetime.now() - timedelta(hours=1),
                 "maintenance_request_id": request.id,
                 "project_id": request.project_id.id,
-                "account_id": request.project_id.analytic_account_id.id,
+                "account_id": request.project_id.account_id.id,
                 "name": "Test Maintenance Request Timesheet line",
                 "user_id": self.env.user.id,
             }
@@ -84,7 +84,7 @@ class TestMaintenanceTimesheetTimeControl(BaseCommon):
         self.assertEqual(wizard.name, analytic_line.name)
         self.assertEqual(wizard.project_id, request.project_id)
         self.assertEqual(
-            wizard.analytic_line_id.account_id, request.project_id.analytic_account_id
+            wizard.analytic_line_id.account_id, request.project_id.account_id
         )
         self.assertEqual(wizard.analytic_line_id, analytic_line)
         new_act = wizard.with_context(show_created_timer=True).action_switch()
